@@ -29,22 +29,6 @@ pipeline {
                 '''
             }
         }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t django-app:${BUILD_NUMBER} .'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh '''
-                    docker stop django-app || true
-                    docker rm django-app || true
-                    docker run -d --name django-app -p 8000:8000 django-app:${BUILD_NUMBER}
-                '''
-            }
-        }
     }
 
     post {
