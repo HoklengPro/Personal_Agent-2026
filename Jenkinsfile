@@ -39,7 +39,8 @@ pipeline {
                           -Dsonar.projectName="Django Pipeline" \
                           -Dsonar.sources=. \
                           -Dsonar.exclusions=venv/**,**/migrations/** \
-                          -Dsonar.language=py
+                          -Dsonar.language=py \
+                          -Dsonar.token=$SONAR_AUTH_TOKEN
                     '''
                 }
             }
