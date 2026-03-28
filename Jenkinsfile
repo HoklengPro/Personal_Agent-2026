@@ -29,6 +29,21 @@ pipeline {
                 '''
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    sh '''
+                        sonar-scanner \
+                          -Dsonar.projectKey=django-pipeline \
+                          -Dsonar.projectName="Django Pipeline" \
+                          -Dsonar.sources=. \
+                          -Dsonar.exclusions=venv/**,**/migrations/** \
+                          -Dsonar.language=py
+                    '''
+                }
+            }
+        }
     }
 
     post {
